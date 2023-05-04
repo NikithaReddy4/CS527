@@ -24,7 +24,7 @@ import java.io.IOException;
  * To invoke from the command line, assuming you've downloaded the jsoup jar to your current directory:</p>
  * <p><code>java -cp jsoup.jar org.jsoup.examples.HtmlToPlainText url [selector]</code></p>
  * where <i>url</i> is the URL to fetch, and <i>selector</i> is an optional CSS selector.
- * 
+ *
  * @author Jonathan Hedley, jonathan@hedley.net
  */
 public class HtmlToPlainText {

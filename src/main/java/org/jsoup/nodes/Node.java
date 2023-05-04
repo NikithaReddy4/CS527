@@ -463,7 +463,7 @@ public abstract class Node implements Cloneable {
         nodes.addAll(index, Arrays.asList(children));
         reindexChildren(index);
     }
-    
+
     protected void reparentChild(Node child) {
         child.setParentNode(this);
     }
@@ -600,7 +600,7 @@ public abstract class Node implements Cloneable {
      * @return outer HTML.
      * @see #outerHtml()
      */
-	public String toString() {
+    public String toString() {
         return outerHtml();
     }
 
@@ -706,19 +706,19 @@ public abstract class Node implements Cloneable {
 
         public void head(Node node, int depth) {
             try {
-				node.outerHtmlHead(accum, depth, out);
-			} catch (IOException exception) {
-				throw new SerializationException(exception);
-			}
+                node.outerHtmlHead(accum, depth, out);
+            } catch (IOException exception) {
+                throw new SerializationException(exception);
+            }
         }
 
         public void tail(Node node, int depth) {
             if (!node.nodeName().equals("#text")) { // saves a void hit.
-				try {
-					node.outerHtmlTail(accum, depth, out);
-				} catch (IOException exception) {
-					throw new SerializationException(exception);
-				}
+                try {
+                    node.outerHtmlTail(accum, depth, out);
+                } catch (IOException exception) {
+                    throw new SerializationException(exception);
+                }
             }
         }
     }

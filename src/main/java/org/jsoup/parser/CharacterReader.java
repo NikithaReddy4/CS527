@@ -2,7 +2,6 @@ package org.jsoup.parser;
 
 import org.jsoup.UncheckedIOException;
 import org.jsoup.helper.Validate;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -10,22 +9,35 @@ import java.util.Arrays;
 import java.util.Locale;
 
 /**
- CharacterReader consumes tokens off a string. Used internally by jsoup. API subject to changes.
+ * CharacterReader consumes tokens off a string. Used internally by jsoup. API subject to changes.
  */
 public final class CharacterReader {
+
     static final char EOF = (char) -1;
+
     private static final int maxStringCacheLen = 12;
-    static final int maxBufferLen = 1024 * 32; // visible for testing
+
+    // visible for testing
+    static final int maxBufferLen = 1024 * 32;
+
     private static final int readAheadLimit = (int) (maxBufferLen * 0.75);
 
     private final char[] charBuf;
+
     private final Reader reader;
+
     private int bufLength;
+
     private int bufSplitPoint;
+
     private int bufPos;
+
     private int readerPos;
+
     private int bufMark = -1;
-    private final String[] stringCache = new String[512]; // holds reused strings in this doc, to lessen garbage
+
+    // holds reused strings in this doc, to lessen garbage
+    private final String[] stringCache = new String[512];
 
     public CharacterReader(Reader input, int sz) {
         Validate.notNull(input);
@@ -33,7 +45,6 @@ public final class CharacterReader {
         reader = input;
         charBuf = new char[sz > maxBufferLen ? maxBufferLen : sz];
         bufferUp();
-
         if (isBinary()) {
             throw new UncheckedIOException("Input is binary and unsupported");
         }
@@ -51,14 +62,14 @@ public final class CharacterReader {
         final int pos = bufPos;
         if (pos < bufSplitPoint)
             return;
-
         try {
             final long skipped = reader.skip(pos);
             reader.mark(maxBufferLen);
             final int read = reader.read(charBuf);
             reader.reset();
             if (read != -1) {
-                Validate.isTrue(skipped == pos); // Previously asserted that there is room in buf to skip, so this will be a WTF
+                // Previously asserted that there is room in buf to skip, so this will be a WTF
+                Validate.isTrue(skipped == pos);
                 bufLength = read;
                 readerPos += pos;
                 bufPos = 0;
@@ -110,7 +121,6 @@ public final class CharacterReader {
     void unconsume() {
         if (bufPos < 1)
             throw new UncheckedIOException(new IOException("No buffer left to unconsume"));
-
         bufPos--;
     }
 
@@ -131,7 +141,6 @@ public final class CharacterReader {
     void rewindToMark() {
         if (bufMark == -1)
             throw new UncheckedIOException(new IOException("Mark invalid"));
-
         bufPos = bufMark;
     }
 
@@ -163,12 +172,17 @@ public final class CharacterReader {
         for (int offset = bufPos; offset < bufLength; offset++) {
             // scan to first instance of startchar:
             if (startChar != charBuf[offset])
-                while(++offset < bufLength && startChar != charBuf[offset]) { /* empty */ }
+                while (++offset < bufLength && startChar != charBuf[offset]) {
+                    /* empty */
+                }
             int i = offset + 1;
-            int last = i + seq.length()-1;
+            int last = i + seq.length() - 1;
             if (offset < bufLength && last <= bufLength) {
-                for (int j = 1; i < last && seq.charAt(j) == charBuf[i]; i++, j++) { /* empty */ }
-                if (i == last) // found full sequence
+                for (int j = 1; i < last && seq.charAt(j) == charBuf[i]; i++, j++) {
+                    /* empty */
+                }
+                if (// found full sequence
+                i == last)
                     return offset - bufPos;
             }
         }
@@ -215,7 +229,6 @@ public final class CharacterReader {
         final char[] val = charBuf;
         final int charLen = chars.length;
         int i;
-
         OUTER: while (pos < remaining) {
             for (i = 0; i < charLen; i++) {
                 if (val[pos] == chars[i])
@@ -223,9 +236,8 @@ public final class CharacterReader {
             }
             pos++;
         }
-
         bufPos = pos;
-        return pos > start ? cacheString(charBuf, stringCache, start, pos -start) : "";
+        return pos > start ? cacheString(charBuf, stringCache, start, pos - start) : "";
     }
 
     String consumeToAnySorted(final char... chars) {
@@ -234,14 +246,13 @@ public final class CharacterReader {
         final int start = pos;
         final int remaining = bufLength;
         final char[] val = charBuf;
-
         while (pos < remaining) {
             if (Arrays.binarySearch(chars, val[pos]) >= 0)
                 break;
             pos++;
         }
         bufPos = pos;
-        return bufPos > start ? cacheString(charBuf, stringCache, start, pos -start) : "";
+        return bufPos > start ? cacheString(charBuf, stringCache, start, pos - start) : "";
     }
 
     String consumeData() {
@@ -251,9 +262,8 @@ public final class CharacterReader {
         final int start = pos;
         final int remaining = bufLength;
         final char[] val = charBuf;
-
         OUTER: while (pos < remaining) {
-            switch (val[pos]) {
+            switch(val[pos]) {
                 case '&':
                 case '<':
                 case TokeniserState.nullChar:
@@ -263,7 +273,7 @@ public final class CharacterReader {
             }
         }
         bufPos = pos;
-        return pos > start ? cacheString(charBuf, stringCache, start, pos -start) : "";
+        return pos > start ? cacheString(charBuf, stringCache, start, pos - start) : "";
     }
 
     String consumeTagName() {
@@ -274,9 +284,8 @@ public final class CharacterReader {
         final int start = pos;
         final int remaining = bufLength;
         final char[] val = charBuf;
-
         OUTER: while (pos < remaining) {
-            switch (val[pos]) {
+            switch(val[pos]) {
                 case '\t':
                 case '\n':
                 case '\r':
@@ -290,9 +299,8 @@ public final class CharacterReader {
             }
             pos++;
         }
-
         bufPos = pos;
-        return pos > start ? cacheString(charBuf, stringCache, start, pos -start) : "";
+        return pos > start ? cacheString(charBuf, stringCache, start, pos - start) : "";
     }
 
     String consumeToEnd() {
@@ -305,14 +313,13 @@ public final class CharacterReader {
     String consumeLetterSequence() {
         bufferUp();
         int start = bufPos;
-        while (bufPos < bufLength) {
+        while (bufPos <= bufLength) {
             char c = charBuf[bufPos];
             if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || Character.isLetter(c))
                 bufPos++;
             else
                 break;
         }
-
         return cacheString(charBuf, stringCache, start, bufPos - start);
     }
 
@@ -333,7 +340,6 @@ public final class CharacterReader {
             else
                 break;
         }
-
         return cacheString(charBuf, stringCache, start, bufPos - start);
     }
 
@@ -365,7 +371,6 @@ public final class CharacterReader {
 
     boolean matches(char c) {
         return !isEmpty() && charBuf[bufPos] == c;
-
     }
 
     boolean matches(String seq) {
@@ -373,10 +378,8 @@ public final class CharacterReader {
         int scanLength = seq.length();
         if (scanLength > bufLength - bufPos)
             return false;
-
-        for (int offset = 0; offset < scanLength; offset++)
-            if (seq.charAt(offset) != charBuf[bufPos +offset])
-                return false;
+        for (int offset = 0; offset < scanLength; offset++) if (seq.charAt(offset) != charBuf[bufPos + offset])
+            return false;
         return true;
     }
 
@@ -385,7 +388,6 @@ public final class CharacterReader {
         int scanLength = seq.length();
         if (scanLength > bufLength - bufPos)
             return false;
-
         for (int offset = 0; offset < scanLength; offset++) {
             char upScan = Character.toUpperCase(seq.charAt(offset));
             char upTarget = Character.toUpperCase(charBuf[bufPos + offset]);
@@ -398,7 +400,6 @@ public final class CharacterReader {
     boolean matchesAny(char... seq) {
         if (isEmpty())
             return false;
-
         bufferUp();
         char c = charBuf[bufPos];
         for (char seek : seq) {
@@ -453,7 +454,8 @@ public final class CharacterReader {
         return (nextIndexOf(loScan) > -1) || (nextIndexOf(hiScan) > -1);
     }
 
-    private static final int numNullsConsideredBinary = 10; // conservative
+    // conservative
+    private static final int numNullsConsideredBinary = 10;
 
     /**
      *  Heuristic to determine if the current buffer looks like binary content. Reader will already hopefully be
@@ -461,12 +463,10 @@ public final class CharacterReader {
      */
     boolean isBinary() {
         int nullsSeen = 0;
-
         for (int i = bufPos; i < bufLength; i++) {
             if (charBuf[i] == '\0')
                 nullsSeen++;
         }
-
         return nullsSeen >= numNullsConsideredBinary;
     }
 
@@ -488,27 +488,29 @@ public final class CharacterReader {
             return new String(charBuf, start, count);
         if (count < 1)
             return "";
-
         // calculate hash:
         int hash = 0;
         int offset = start;
         for (int i = 0; i < count; i++) {
             hash = 31 * hash + charBuf[offset++];
         }
-
         // get from cache
         final int index = hash & stringCache.length - 1;
         String cached = stringCache[index];
-
-        if (cached == null) { // miss, add
+        if (cached == null) {
+            // miss, add
             cached = new String(charBuf, start, count);
             stringCache[index] = cached;
-        } else { // hashcode hit, check equality
-            if (rangeEquals(charBuf, start, count, cached)) { // hit
+        } else {
+            // hashcode hit, check equality
+            if (rangeEquals(charBuf, start, count, cached)) {
+                // hit
                 return cached;
-            } else { // hashcode conflict
+            } else {
+                // hashcode conflict
                 cached = new String(charBuf, start, count);
-                stringCache[index] = cached; // update the cache, as recently used strings are more likely to show up again
+                // update the cache, as recently used strings are more likely to show up again
+                stringCache[index] = cached;
             }
         }
         return cached;
