@@ -3,6 +3,7 @@ package org.jsoup;
 
 import java.io.*;
 
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.utils.CodeGenerationUtils;
 import com.github.javaparser.utils.SourceRoot;
@@ -49,29 +50,6 @@ public class CodeModifierTest
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 		String line;
-//		while ((line = reader.readLine()) != null) {
-//			if (line.startsWith("Running ")) {
-//				String testCaseName = line.substring("Running ".length());
-//
-//				// Start a new thread to keep track of the running time of this test case
-//				Thread testThread = new Thread(() -> {
-//					try {
-//						Thread.sleep(30000); // Sleep for the timeout duration
-//						System.err.println("Timeout reached for test case: " + testCaseName);
-//						System.exit(1); // Exit with non-zero status code to indicate test failure
-//					} catch (InterruptedException e) {
-//						// Ignore interruption
-//					}
-//				});
-//
-//				testThread.start(); // Start the thread
-//
-//				// Wait for the process to exit or the thread to finish
-//				exitCode = process.waitFor();
-//				testThread.interrupt(); // Interrupt the thread to stop it from continuing to run
-//				testThread.join(); // Wait for the thread to finish before continuing
-//			}
-//		}
 		int exitCode = process.waitFor();
 		executor.shutdownNow();
 		String[] reportCommand = {"mvn", "surefire-report:report-only" };
@@ -102,9 +80,9 @@ public class CodeModifierTest
 		// includes the test resource information (i.e., the source code info
 		// for Jsoup for this assignment) copied from src/test/resources
 		// during test execution
-		SourceRoot sourceRoot = new SourceRoot(
-				CodeGenerationUtils.mavenModuleRoot(CodeModifierTest.class)
-						.resolve("target/classes"));
+//		SourceRoot sourceRoot = new SourceRoot(
+//				CodeGenerationUtils.mavenModuleRoot(CodeModifierTest.class)
+//						.resolve("target/classes"));
 		String testDirPath = System.getProperty("user.dir") + "/src/main/java/org/jsoup";
 		String dir_path = "";
 		Path path = Paths.get(testDirPath);
@@ -145,6 +123,7 @@ public class CodeModifierTest
 		for (mutationoperator = 0; mutationoperator < 2; mutationoperator++) {
 			operator_mutantgenerated=0;
 			operator_mutantkilled=0;
+
 			for (File file : files) {
 				dir_path = "";
 				if (file.isDirectory()) {
@@ -159,10 +138,11 @@ public class CodeModifierTest
 								String filePath = d_file.getAbsolutePath();
 								String packageName = getPackageName(filePath);
 								String fileName = d_file.getName();//Attributes.java
-								CompilationUnit cu = sourceRoot.parse(dir_path, fileName);
 								//CompilationUnit scu = sourceRoot.parse(dir_path, fileName);
-								if (filecount<1&&!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
+								if (fileName.equals("Attributes.java")&&!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
 									{
+										CompilationUnit cu = StaticJavaParser.parse(d_file);
+
 										filecount++;
 										File og = new File(filePath);
 										//keep copy of original file original
@@ -171,29 +151,6 @@ public class CodeModifierTest
 										//Map<operator,map<file,list<mutants>>
 										//Map<operator,mutationscore>
 										switch (mutationoperator) {
-											//NegateConditions operator = new NegateConditions(cu);
-											//operator.visit(cu, fileName);
-
-											//ConditionalsBoundary operator = new ConditionalsBoundary(cu);
-											//operator.visit(cu, fileName);
-
-//									Increments operator = new Increments(cu);
-//									operator.visit(cu, fileName);
-
-											//	AssignIncrements operator = new AssignIncrements(cu);
-											//    operator.visit(cu, fileName);
-
-											//	FalseReturns operator = new FalseReturns(cu);
-											//	    operator.visit(cu, fileName);
-
-											//	TrueReturns operator = new TrueReturns(cu);
-											//	operator.visit(cu, fileName);
-
-											//		EmptyReturns operator = new EmptyReturns(cu);
-											//			operator.visit(cu, fileName);
-
-											//	VoidMethodCall operator = new VoidMethodCall(cu);
-											//			operator.visit(cu, fileName);
 
 											case 0:
 												NegateConditions operator = new NegateConditions(cu);
@@ -202,13 +159,14 @@ public class CodeModifierTest
 												mutantgenerated += operator.getMutants().size();
 												System.out.println("Mutations in " + fileName + "\n");
 												mutants_map = operator.getMutantsMap();
-												mutants = operator.getMutants();
+												mutants =new ArrayList<>(operator.getMutants());
 												break;
 											case 1:
 												ConditionalsBoundary conditionalsBoundary = new ConditionalsBoundary(cu);
 												conditionalsBoundary.visit(cu, fileName);
 												operator_mutantgenerated+=conditionalsBoundary.getMutants().size();
 												mutantgenerated += conditionalsBoundary.getMutants().size();
+												System.out.println(operator_mutantgenerated);
 												System.out.println("Mutations in " + fileName + "\n");
 												mutants_map = conditionalsBoundary.getMutantsMap();
 												mutants = conditionalsBoundary.getMutants();
@@ -390,10 +348,9 @@ public class CodeModifierTest
 						}
 					}
 				}
-				writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated"+operator_mutantgenerated+"\n"+"Mutants Killed"+operator_mutantkilled+"\n"+"Mutation Score"+(operator_mutantkilled/operator_mutantgenerated)*100+"\n");
-        		writer.close();
+				writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated"+operator_mutantgenerated+"\n"+"Mutants Killed"+operator_mutantkilled+"\n"+((double)operator_mutantkilled/operator_mutantgenerated)*100+"\n");
 			}
-		
+		writer.close();
     }
 
 
@@ -408,12 +365,13 @@ public class CodeModifierTest
 			}
 		}
 	}
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 		CodeModifierTest cm=new CodeModifierTest();
 		//deletes the surefire reports from previous mutation testing in reports folder
 		cm.deleteFolderContents(new File(System.getProperty("user.dir")+"/report/"));
 		cm.getJavaFilesAndApplyMutators();
-		//runMavenTests(1);
+
 
 
 
