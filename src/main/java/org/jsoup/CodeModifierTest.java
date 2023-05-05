@@ -121,7 +121,7 @@ public class CodeModifierTest
 		operatorMap.put(13, "True Returns Mutator");
 		operatorMap.put(14, "Void Method Call Mutator");
 		//iterator for the mutators, in each iterator one mutator is picked and is applied to all the java files
-		for (mutationoperator = 0; mutationoperator < 15; mutationoperator++) {
+		for (mutationoperator = 4; mutationoperator < 5; mutationoperator++) {
 			operator_mutantgenerated=0;
 			operator_mutantkilled=0;
 
@@ -140,7 +140,7 @@ public class CodeModifierTest
 								String packageName = getPackageName(filePath);
 								String fileName = d_file.getName();//Attributes.java
 								//CompilationUnit scu = sourceRoot.parse(dir_path, fileName);
-								if (fileName.equals("Comment.java")&&!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
+								if (!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
 									{
 										CompilationUnit cu = StaticJavaParser.parse(d_file);
 
