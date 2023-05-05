@@ -84,6 +84,7 @@ public class CodeModifierTest
 		Path reportSourcePath = Paths.get(System.getProperty("user.dir"), "target", "site", "surefire-report.html");
 		Path reportDestPath = Paths.get(System.getProperty("user.dir"), "report", "surefire-report"+i+".html");
 		Files.createDirectories(reportDestPath.getParent());
+		// copy the surefire from target/site/surefire-report.html to a report folder
 		Files.copy(reportSourcePath, reportDestPath, StandardCopyOption.REPLACE_EXISTING);
 		if(exitCode==0)
 		{
@@ -122,8 +123,28 @@ public class CodeModifierTest
 		int m = 0;
 		int mutantgenerated = 0;
 		int mutationoperator=0;
+		int operator_mutantgenerated=0;
+		int operator_mutantkilled=0;
+		Map<Integer, String> operatorMap = new HashMap<Integer, String>();
+		operatorMap.put(0, "Negate Conditions");
+        operatorMap.put(1, "Conditional Boundary");
+		operatorMap.put(2, "Conditional Boundary");
+		operatorMap.put(3, "Conditional Boundary");
+		operatorMap.put(4, "Conditional Boundary");
+		operatorMap.put(5, "Conditional Boundary");
+		operatorMap.put(6, "Conditional Boundary");
+		operatorMap.put(7, "Conditional Boundary");
+		operatorMap.put(8, "Conditional Boundary");
+		operatorMap.put(9, "Conditional Boundary");
+		operatorMap.put(10, "Conditional Boundary");
+		operatorMap.put(11, "Conditional Boundary");
+		operatorMap.put(12, "Conditional Boundary");
+		operatorMap.put(13, "Conditional Boundary");
+		operatorMap.put(14, "Conditional Boundary");
 		//iterator for the mutators, in each iterator one mutator is picked and is applied to all the java files
-		for (mutationoperator = 1; mutationoperator < 2; mutationoperator++) {
+		for (mutationoperator = 0; mutationoperator < 2; mutationoperator++) {
+			operator_mutantgenerated=0;
+			operator_mutantkilled=0;
 			for (File file : files) {
 				dir_path = "";
 				if (file.isDirectory()) {
@@ -177,6 +198,7 @@ public class CodeModifierTest
 											case 0:
 												NegateConditions operator = new NegateConditions(cu);
 												operator.visit(cu, fileName);
+												operator_mutantgenerated+=operator.getMutants().size();
 												mutantgenerated += operator.getMutants().size();
 												System.out.println("Mutations in " + fileName + "\n");
 												mutants_map = operator.getMutantsMap();
@@ -185,11 +207,129 @@ public class CodeModifierTest
 											case 1:
 												ConditionalsBoundary conditionalsBoundary = new ConditionalsBoundary(cu);
 												conditionalsBoundary.visit(cu, fileName);
+												operator_mutantgenerated+=conditionalsBoundary.getMutants().size();
 												mutantgenerated += conditionalsBoundary.getMutants().size();
 												System.out.println("Mutations in " + fileName + "\n");
 												mutants_map = conditionalsBoundary.getMutantsMap();
 												mutants = conditionalsBoundary.getMutants();
 												break;
+//											case 2:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 3:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 4:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 5:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 6:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 7:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 8:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 9:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 10:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 11:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 12:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//											case 13:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
+//									        case 14:
+//												NegateConditions operator = new NegateConditions(cu);
+//												operator.visit(cu, fileName);
+//												operator_mutantgenerated+=operator.getMutants().size();
+//												mutantgenerated += operator.getMutants().size();
+//												System.out.println("Mutations in " + fileName + "\n");
+//												mutants_map = operator.getMutantsMap();
+//												mutants = operator.getMutants();
+//												break;
 											default:
 												break;
 										}
@@ -209,6 +349,7 @@ public class CodeModifierTest
 													if (runMavenTests(m) == 0) {
 														System.out.println("passed " + m + "\n");
 													} else {
+														operator_mutantkilled++;
 														mutantkilled++;
 														System.out.println("failed" + "\n");
 													}
@@ -245,53 +386,14 @@ public class CodeModifierTest
 									}
 								}
 							}
-//						else if (file.isFile() && file.getName().endsWith(".java")) {
-//
-//							//System.out.println(getPackageName(file.getAbsolutePath())+"  "+file.getName());
-//							CompilationUnit cu = sourceRoot.parse(testDirPath, file.getName());
-//							// Instantiate the CodeModifier class that you will implement to perform
-//							// the actual task. This is a visitor class according to the visitor
-//							// pattern (one of the most important design patterns).
-////				CodeModifier codeModifier = new CodeModifier();
-////				// Apply our visitor class on the code representation for the given
-////				// Java file. In this way, our visit function(s) can be automatically
-////				// applied to all possible elements of the specified type(s).
-////				codeModifier.visit(cu, null);
-////				if(count<1 && !(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
-////					count++;
-////					CodeModifier codeModifier = new CodeModifier();
-////
-////					codeModifier.visit(cu, null);
-////				}
-//
-//
-////				File outputFile = fileInGeneratedTestSourcesDirectory(getPackageName(file.getAbsolutePath()), file.getName());
-////				// Write the modified code to the new file
-////				outputFile.getParentFile().mkdirs();
-////				try (FileWriter outputWriter = new FileWriter(outputFile)) {
-////					outputWriter.write(cu.toString());
-////				}catch (IOException e) {
-////					// Handle the exception
-////					e.printStackTrace();
-////				}
-////					String p = System.getProperty("user.dir") + "/new_code";
-////
-////			try {
-////			Path projectDir = Paths.get(p);
-////			runMavenTests(projectDir);
-//////			runSurefireReport(projectDir);
-//////			runTestsAndGenerateReports(projectDir.toString());
-////
-////		} catch (IOException | InterruptedException e) {
-////			e.printStackTrace();
-////		}
-//						}
+
 						}
 					}
 				}
+				writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated"+operator_mutantgenerated+"\n"+"Mutants Killed"+operator_mutantkilled+"\n"+"Mutation Score"+(operator_mutantkilled/operator_mutantgenerated)*100+"\n");
+        		writer.close();
 			}
-		writer.write(mutationoperator+"\n"+"mutantgenerated"+mutantgenerated+"\n"+"mutantkilled"+mutantkilled);
-        writer.close();
+		
     }
 
 
@@ -308,11 +410,9 @@ public class CodeModifierTest
 	}
 	public static void main(String[] args) throws IOException, InterruptedException {
 		CodeModifierTest cm=new CodeModifierTest();
-		//generate a random number to set the number of mutants, and have a for loop to generate that many mutants TODO:
-		//lets keep a copy of dir
+		//deletes the surefire reports from previous mutation testing in reports folder
 		cm.deleteFolderContents(new File(System.getProperty("user.dir")+"/report/"));
 		cm.getJavaFilesAndApplyMutators();
-		// copy the surefire from target/site/surefire-report.html to a report folder
 		//runMavenTests(1);
 
 
