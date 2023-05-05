@@ -18,31 +18,34 @@ import java.util.Map;
 //<= <
 //> >=
 //>= >
-
 public class ConditionalsBoundary extends VoidVisitorAdapter<String>
 {
 	private final CompilationUnit originalCu;
 	private final List<CompilationUnit> mutants = new ArrayList<>();
+
 	private final Map< CompilationUnit, String> mutantexp_withmutants = new HashMap<>();
 	public boolean mutated = false;
 	private int mutant = 0;
+
 	public ConditionalsBoundary(CompilationUnit originalCu) {
 		this.originalCu = originalCu;
 	}
+
 	public List<CompilationUnit> getMutants() {
 		return mutants;
 	}
+
 	public Map<CompilationUnit, String> getMutantsMap() {
 		return mutantexp_withmutants;
 	}
+
 	/**
 	 * This visit function will be automatically applied to all binary
 	 * expressions in the given Java file
 	 */
-	@Override
-	public void visit(BinaryExpr n, String filename) {
 
-//	int flag=0;
+	public void visit(String filename) {
+
 		if(!mutated)
 
 		{

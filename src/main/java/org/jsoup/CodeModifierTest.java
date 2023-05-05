@@ -7,6 +7,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.utils.CodeGenerationUtils;
 import com.github.javaparser.utils.SourceRoot;
+import com.sun.org.apache.bcel.internal.Const;
 
 import java.util.*;
 import java.nio.file.*;
@@ -104,23 +105,23 @@ public class CodeModifierTest
 		int operator_mutantgenerated=0;
 		int operator_mutantkilled=0;
 		Map<Integer, String> operatorMap = new HashMap<Integer, String>();
-		operatorMap.put(0, "Negate Conditions");
-        operatorMap.put(1, "Conditional Boundary");
-		operatorMap.put(2, "Conditional Boundary");
-		operatorMap.put(3, "Conditional Boundary");
-		operatorMap.put(4, "Conditional Boundary");
-		operatorMap.put(5, "Conditional Boundary");
-		operatorMap.put(6, "Conditional Boundary");
-		operatorMap.put(7, "Conditional Boundary");
-		operatorMap.put(8, "Conditional Boundary");
-		operatorMap.put(9, "Conditional Boundary");
-		operatorMap.put(10, "Conditional Boundary");
-		operatorMap.put(11, "Conditional Boundary");
-		operatorMap.put(12, "Conditional Boundary");
-		operatorMap.put(13, "Conditional Boundary");
-		operatorMap.put(14, "Conditional Boundary");
+		operatorMap.put(0, "Negate Conditions Mutator");
+        operatorMap.put(1, "Conditional Boundary Mutator");
+		operatorMap.put(2, "Math Mutator");
+		operatorMap.put(3, "Increments Mutator");
+		operatorMap.put(4, "Invert Negatives Mutator");
+		operatorMap.put(5, "Inline Constant Mutator");
+		operatorMap.put(6, "False Returns Mutator");
+		operatorMap.put(7, "Constructor Calls Mutator");
+		operatorMap.put(8, "Assign Increments Mutator");
+		operatorMap.put(9, "AOR Visitor Mutator");
+		operatorMap.put(10, "Primitive Return Mutator");
+		operatorMap.put(11, "Remove Conditionals Mutator");
+		operatorMap.put(12, "BitWise Mutator");
+		operatorMap.put(13, "True Returns Mutator");
+		operatorMap.put(14, "Void Method Call Mutator");
 		//iterator for the mutators, in each iterator one mutator is picked and is applied to all the java files
-		for (mutationoperator = 0; mutationoperator < 2; mutationoperator++) {
+		for (mutationoperator = 0; mutationoperator < 15; mutationoperator++) {
 			operator_mutantgenerated=0;
 			operator_mutantkilled=0;
 
@@ -139,7 +140,7 @@ public class CodeModifierTest
 								String packageName = getPackageName(filePath);
 								String fileName = d_file.getName();//Attributes.java
 								//CompilationUnit scu = sourceRoot.parse(dir_path, fileName);
-								if (fileName.equals("Attributes.java")&&!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
+								if (fileName.equals("Comment.java")&&!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
 									{
 										CompilationUnit cu = StaticJavaParser.parse(d_file);
 
@@ -157,6 +158,8 @@ public class CodeModifierTest
 												operator.visit(cu, fileName);
 												operator_mutantgenerated+=operator.getMutants().size();
 												mutantgenerated += operator.getMutants().size();
+												System.out.println("**********************************************");
+												System.out.println(operatorMap.get(mutationoperator));
 												System.out.println("Mutations in " + fileName + "\n");
 												mutants_map = operator.getMutantsMap();
 												mutants =new ArrayList<>(operator.getMutants());
@@ -166,128 +169,155 @@ public class CodeModifierTest
 												conditionalsBoundary.visit(cu, fileName);
 												operator_mutantgenerated+=conditionalsBoundary.getMutants().size();
 												mutantgenerated += conditionalsBoundary.getMutants().size();
-												System.out.println(operator_mutantgenerated);
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
 												System.out.println("Mutations in " + fileName + "\n");
 												mutants_map = conditionalsBoundary.getMutantsMap();
 												mutants = conditionalsBoundary.getMutants();
 												break;
-//											case 2:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 3:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 4:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 5:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 6:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 7:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 8:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 9:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 10:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 11:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 12:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//											case 13:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
-//									        case 14:
-//												NegateConditions operator = new NegateConditions(cu);
-//												operator.visit(cu, fileName);
-//												operator_mutantgenerated+=operator.getMutants().size();
-//												mutantgenerated += operator.getMutants().size();
-//												System.out.println("Mutations in " + fileName + "\n");
-//												mutants_map = operator.getMutantsMap();
-//												mutants = operator.getMutants();
-//												break;
+											case 2:
+												MathMutator mathMutator = new MathMutator(cu);
+												mathMutator.visit(fileName);
+												operator_mutantgenerated+=mathMutator.getMutants().size();
+												mutantgenerated += mathMutator.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = mathMutator.getMutantsMap();
+												mutants = mathMutator.getMutants();
+												break;
+											case 3:
+												Increments increments = new Increments(cu);
+												increments.visit( fileName);
+												operator_mutantgenerated+=increments.getMutants().size();
+												mutantgenerated += increments.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = increments.getMutantsMap();
+												mutants = increments.getMutants();
+												break;
+											case 4:
+												InvertNegatives invertNegatives = new InvertNegatives(cu);
+												invertNegatives.visit(fileName);
+												operator_mutantgenerated+=invertNegatives.getMutants().size();
+												mutantgenerated += invertNegatives.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = invertNegatives.getMutantsMap();
+												mutants = invertNegatives.getMutants();
+												break;
+											case 5:
+												InlineConstant inlineConstant = new InlineConstant(cu);
+												inlineConstant.visit(fileName);
+												operator_mutantgenerated+=inlineConstant.getMutants().size();
+												mutantgenerated += inlineConstant.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = inlineConstant.getMutantsMap();
+												mutants = inlineConstant.getMutants();
+												break;
+											case 6:
+												FalseReturns falseReturns = new FalseReturns(cu);
+												falseReturns.visit(cu, fileName);
+												operator_mutantgenerated+=falseReturns.getMutants().size();
+												mutantgenerated += falseReturns.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = falseReturns.getMutantsMap();
+												mutants = falseReturns.getMutants();
+												break;
+											case 7:
+												ConstructorCalls constructorCalls = new ConstructorCalls(cu);
+												constructorCalls.visit(cu, fileName);
+												operator_mutantgenerated+=constructorCalls.getMutants().size();
+												mutantgenerated += constructorCalls.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = constructorCalls.getMutantsMap();
+												mutants = constructorCalls.getMutants();
+												break;
+											case 8:
+												AssignIncrements assignIncrements = new AssignIncrements(cu);
+												assignIncrements.visit(cu, fileName);
+												operator_mutantgenerated+=assignIncrements.getMutants().size();
+												mutantgenerated += assignIncrements.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = assignIncrements.getMutantsMap();
+												mutants = assignIncrements.getMutants();
+												break;
+											case 9:
+												AORVisitor aorVisitor = new AORVisitor(cu);
+												aorVisitor.visit(fileName);
+												operator_mutantgenerated+=aorVisitor.getMutants().size();
+												mutantgenerated += aorVisitor.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = aorVisitor.getMutantsMap();
+												mutants = aorVisitor.getMutants();
+												break;
+											case 10:
+												PrimitiveReturn primitiveReturn = new PrimitiveReturn(cu);
+												primitiveReturn.visit(cu, fileName);
+												operator_mutantgenerated+=primitiveReturn.getMutants().size();
+												mutantgenerated += primitiveReturn.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = primitiveReturn.getMutantsMap();
+												mutants = primitiveReturn.getMutants();
+												break;
+											case 11:
+												RemoveConditionals removeConditionals = new RemoveConditionals(cu);
+												removeConditionals.visit(cu, fileName);
+												operator_mutantgenerated+=removeConditionals.getMutants().size();
+												mutantgenerated += removeConditionals.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = removeConditionals.getMutantsMap();
+												mutants = removeConditionals.getMutants();
+												break;
+											case 12:
+												OBBN1 obbn1 = new OBBN1(cu);
+												obbn1.visit(cu, fileName);
+												operator_mutantgenerated+=obbn1.getMutants().size();
+												mutantgenerated += obbn1.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = obbn1.getMutantsMap();
+												mutants = obbn1.getMutants();
+												break;
+											case 13:
+												TrueReturns trueReturns = new TrueReturns(cu);
+												trueReturns.visit(cu, fileName);
+												operator_mutantgenerated+=trueReturns.getMutants().size();
+												mutantgenerated += trueReturns.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = trueReturns.getMutantsMap();
+												mutants = trueReturns.getMutants();
+												break;
+									        case 14:
+												VoidMethodCall voidMethodCall = new VoidMethodCall(cu);
+												voidMethodCall.visit(cu, fileName);
+												operator_mutantgenerated+=voidMethodCall.getMutants().size();
+												mutantgenerated += voidMethodCall.getMutants().size();
+												System.out.println("**********************************************"+"\n");
+												System.out.println(operatorMap.get(mutationoperator)+"\n");
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = voidMethodCall.getMutantsMap();
+												mutants = voidMethodCall.getMutants();
+												break;
 											default:
 												break;
 										}
@@ -339,8 +369,8 @@ public class CodeModifierTest
 											System.out.println("An error occurred.");
 											e.printStackTrace();
 										}
-										System.out.println("mutantgenerated" + mutantgenerated);
-										System.out.println("mutantkilled" + mutantkilled + "\n");
+										System.out.println("Mutants generated in total=" + mutantgenerated);
+										System.out.println("Mutants killed in total=" + mutantkilled + "\n");
 									}
 								}
 							}
@@ -348,7 +378,7 @@ public class CodeModifierTest
 						}
 					}
 				}
-				writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated"+operator_mutantgenerated+"\n"+"Mutants Killed"+operator_mutantkilled+"\n"+((double)operator_mutantkilled/operator_mutantgenerated)*100+"\n");
+				writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated= "+operator_mutantgenerated+"\n"+"Mutants Killed= "+operator_mutantkilled+"\n"+"Mutation Score= "+((double)operator_mutantkilled/operator_mutantgenerated)*100+"\n");
 			}
 		writer.close();
     }
