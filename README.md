@@ -32,5 +32,7 @@ Java 8 or higher
 Maven 3 or higher
 
 Contributors: 
+
 Nikitha Reddy Sankepally(nikitha6) - Generation of mutants, evaluation of metrics for analysis
+
 Eesha Rajesh Chawhan(chawhan2) - Implementation of mutators
