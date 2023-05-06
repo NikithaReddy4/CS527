@@ -5,7 +5,7 @@ import java.io.*;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-
+import java.time.Instant;
 
 import java.util.*;
 import java.nio.file.*;
@@ -51,6 +51,7 @@ public class CodeModifierTest
 		String line;
 		int exitCode = process.waitFor();
 		executor.shutdownNow();
+
 		String[] reportCommand = {"mvn", "surefire-report:report-only" };
 		ProcessBuilder reportBuilder = new ProcessBuilder(reportCommand);
 		reportBuilder.directory(new File(System.getProperty("user.dir")));
@@ -75,13 +76,6 @@ public class CodeModifierTest
 	}
 
 	public void getJavaFilesAndApplyMutators() throws IOException {
-		// Initialize the source root as the "target/test-classes" dir, which
-		// includes the test resource information (i.e., the source code info
-		// for Jsoup for this assignment) copied from src/test/resources
-		// during test execution
-//		SourceRoot sourceRoot = new SourceRoot(
-//				CodeGenerationUtils.mavenModuleRoot(CodeModifierTest.class)
-//						.resolve("target/classes"));
 		String testDirPath = System.getProperty("user.dir") + "/src/main/java/org/jsoup";
 		String dir_path = "";
 		Path path = Paths.get(testDirPath);
@@ -93,19 +87,19 @@ public class CodeModifierTest
 		String dummdir = System.getProperty("user.dir") + "/src/";
 		String resultpath = System.getProperty("user.dir") + "/results/";
 		FileWriter writer = new FileWriter(resultpath+"result.txt");
-		int count = 0;
-		int tests = 0;
-		int filecount = 0;
-		int mutantkilled = 0;
-		int m = 0;
-		int mutantgenerated = 0;
-		int mutationoperator=0;
-		int operator_mutantgenerated=0;
-		int operator_mutantkilled=0;
+		int filecount=0;
+		int mutatorlimit=4;
+		int filelimit=61;
+		int mutantgenerated = 0;//to keep track of mutants generated throughout the mutation testing process
+		int mutantkilled = 0;//to keep track of mutants killed throughout the mutation testing process
+		int mutationoperator=0;//used for iterating through the mutators
+		int operator_mutantgenerated=0;//to keep track of mutants generated for each operator
+		int operator_mutantkilled=0;//to keep track of mutants killed for each operator
+		int m = 0;// for keeping track of surefire report corresponding to respective mutant
 		Map<Integer, String> operatorMap = new HashMap<Integer, String>();
-		operatorMap.put(0, "Negate Conditions Mutator");
-        operatorMap.put(1, "Conditional Boundary Mutator");
-		operatorMap.put(2, "Math Mutator");
+		operatorMap.put(0, "Conditonal Boundary Mutator");
+		operatorMap.put(1, "Math Mutator");
+		operatorMap.put(2, "Negate Conditions Mutator");
 		operatorMap.put(3, "Increments Mutator");
 		operatorMap.put(4, "Invert Negatives Mutator");
 		operatorMap.put(5, "Inline Constant Mutator");
@@ -118,11 +112,15 @@ public class CodeModifierTest
 		operatorMap.put(12, "BitWise Mutator");
 		operatorMap.put(13, "True Returns Mutator");
 		operatorMap.put(14, "Void Method Call Mutator");
+		operatorMap.put(15, "Experimental Switch Mutator");
+		operatorMap.put(16, "Remove Increments Mutator");
+		operatorMap.put(17, "Empty Returns Mutator");
+		operatorMap.put(18, "Null Returns Mutator");
 		//iterator for the mutators, in each iterator one mutator is picked and is applied to all the java files
-		for (mutationoperator = 4; mutationoperator < 5; mutationoperator++) {
+		for (mutationoperator =0; mutationoperator < 19; mutationoperator++) {
 			operator_mutantgenerated=0;
 			operator_mutantkilled=0;
-
+			filecount=0;
 			for (File file : files) {
 				dir_path = "";
 				if (file.isDirectory()) {
@@ -131,17 +129,15 @@ public class CodeModifierTest
 					File[] dir_files = dir_file.listFiles();
 					List<String> filePaths = new ArrayList<>();
 					if (dir_files != null) {
-						//iterator for all java files 
+						//iterator for all java files
 						for (File d_file : dir_files) {
 							if (d_file.isFile() && d_file.getName().endsWith(".java")) {
 								String filePath = d_file.getAbsolutePath();
 								String packageName = getPackageName(filePath);
 								String fileName = d_file.getName();//Attributes.java
-								//CompilationUnit scu = sourceRoot.parse(dir_path, fileName);
-								if (!(fileName.equals("CodeModifierTest.java")) && !(fileName.equals("CodeModifier.java"))) {
+								if (filecount<filelimit&&!(fileName.equals("CodeModifierTest.java"))) {
 									{
 										CompilationUnit cu = StaticJavaParser.parse(d_file);
-
 										filecount++;
 										File og = new File(filePath);
 										//keep copy of original file original
@@ -150,19 +146,7 @@ public class CodeModifierTest
 										//Map<operator,map<file,list<mutants>>
 										//Map<operator,mutationscore>
 										switch (mutationoperator) {
-
 											case 0:
-												NegateConditions operator = new NegateConditions(cu);
-												operator.visit(cu, fileName);
-												operator_mutantgenerated+=operator.getMutants().size();
-												mutantgenerated += operator.getMutants().size();
-												System.out.println("**********************************************");
-												System.out.println(operatorMap.get(mutationoperator));
-												System.out.println("Mutations in " + fileName + "\n");
-												mutants_map = operator.getMutantsMap();
-												mutants =new ArrayList<>(operator.getMutants());
-												break;
-											case 1:
 												ConditionalsBoundary conditionalsBoundary = new ConditionalsBoundary(cu);
 												conditionalsBoundary.visit(cu, fileName);
 												operator_mutantgenerated+=conditionalsBoundary.getMutants().size();
@@ -173,9 +157,10 @@ public class CodeModifierTest
 												mutants_map = conditionalsBoundary.getMutantsMap();
 												mutants = conditionalsBoundary.getMutants();
 												break;
-											case 2:
+											case 1:
+												System.out.println("entered case");
 												MathMutator mathMutator = new MathMutator(cu);
-												mathMutator.visit(fileName);
+												mathMutator.visit(cu, fileName);
 												operator_mutantgenerated+=mathMutator.getMutants().size();
 												mutantgenerated += mathMutator.getMutants().size();
 												System.out.println("**********************************************"+"\n");
@@ -184,9 +169,20 @@ public class CodeModifierTest
 												mutants_map = mathMutator.getMutantsMap();
 												mutants = mathMutator.getMutants();
 												break;
+											case 2:
+												NegateConditions operator = new NegateConditions(cu);
+												operator.visit(cu, fileName);
+												operator_mutantgenerated+=operator.getMutants().size();
+												mutantgenerated += operator.getMutants().size();
+												System.out.println("**********************************************");
+												System.out.println(operatorMap.get(mutationoperator));
+												System.out.println("Mutations in " + fileName + "\n");
+												mutants_map = operator.getMutantsMap();
+												mutants =new ArrayList<>(operator.getMutants());
+												break;
 											case 3:
 												Increments increments = new Increments(cu);
-												increments.visit( fileName);
+												increments.visit( cu, fileName);
 												operator_mutantgenerated+=increments.getMutants().size();
 												mutantgenerated += increments.getMutants().size();
 												System.out.println("**********************************************"+"\n");
@@ -197,7 +193,7 @@ public class CodeModifierTest
 												break;
 											case 4:
 												InvertNegatives invertNegatives = new InvertNegatives(cu);
-												invertNegatives.visit(fileName);
+												invertNegatives.visit(cu, fileName);
 												operator_mutantgenerated+=invertNegatives.getMutants().size();
 												mutantgenerated += invertNegatives.getMutants().size();
 												System.out.println("**********************************************"+"\n");
@@ -208,7 +204,7 @@ public class CodeModifierTest
 												break;
 											case 5:
 												InlineConstant inlineConstant = new InlineConstant(cu);
-												inlineConstant.visit(fileName);
+												inlineConstant.visit(cu, fileName);
 												operator_mutantgenerated+=inlineConstant.getMutants().size();
 												mutantgenerated += inlineConstant.getMutants().size();
 												System.out.println("**********************************************"+"\n");
@@ -218,6 +214,8 @@ public class CodeModifierTest
 												mutants = inlineConstant.getMutants();
 												break;
 											case 6:
+												System.out.println("entered case");
+
 												FalseReturns falseReturns = new FalseReturns(cu);
 												falseReturns.visit(cu, fileName);
 												operator_mutantgenerated+=falseReturns.getMutants().size();
@@ -229,6 +227,8 @@ public class CodeModifierTest
 												mutants = falseReturns.getMutants();
 												break;
 											case 7:
+												System.out.println("entered case");
+
 												ConstructorCalls constructorCalls = new ConstructorCalls(cu);
 												constructorCalls.visit(cu, fileName);
 												operator_mutantgenerated+=constructorCalls.getMutants().size();
@@ -252,7 +252,7 @@ public class CodeModifierTest
 												break;
 											case 9:
 												AORVisitor aorVisitor = new AORVisitor(cu);
-												aorVisitor.visit(fileName);
+												aorVisitor.visit(cu, fileName);
 												operator_mutantgenerated+=aorVisitor.getMutants().size();
 												mutantgenerated += aorVisitor.getMutants().size();
 												System.out.println("**********************************************"+"\n");
@@ -305,7 +305,7 @@ public class CodeModifierTest
 												mutants_map = trueReturns.getMutantsMap();
 												mutants = trueReturns.getMutants();
 												break;
-									        case 14:
+											case 14:
 												VoidMethodCall voidMethodCall = new VoidMethodCall(cu);
 												voidMethodCall.visit(cu, fileName);
 												operator_mutantgenerated+=voidMethodCall.getMutants().size();
@@ -319,67 +319,71 @@ public class CodeModifierTest
 											default:
 												break;
 										}
-											for (int i = 0; i < mutants.size(); i++) {
-												m++;
-												File outputFile = fileInGeneratedTestSourcesDirectory(filePath);
-												// Write the modified code to the new file which will overwrite the original file
-												outputFile.getParentFile().mkdirs();
-												try (FileWriter outputWriter = new FileWriter(outputFile)) {
-													//System.out.println("The mutants are"+codeModifier.getMutants().get(i).toString());
-													System.out.println(mutants_map.get(mutants.get(i)));
-													outputWriter.write(mutants.get(i).toString());
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
-												try {
-													if (runMavenTests(m) == 0) {
-														System.out.println("passed " + m + "\n");
-													} else {
-														operator_mutantkilled++;
-														mutantkilled++;
-														System.out.println("failed" + "\n");
-													}
-												} catch (InterruptedException e) {
-													throw new RuntimeException(e);
-												}
-												//restore the file
+										for (int i = 0; i < mutants.size(); i++) {
+											m++;
+											File outputFile = fileInGeneratedTestSourcesDirectory(filePath);
+											// Write the modified code to the new file which will overwrite the original file
+											outputFile.getParentFile().mkdirs();
+											try (FileWriter outputWriter = new FileWriter(outputFile)) {
+												//System.out.println("The mutants are"+codeModifier.getMutants().get(i).toString());
+												System.out.println(mutants_map.get(mutants.get(i)));
+												outputWriter.write(mutants.get(i).toString());
+											} catch (IOException e) {
+												e.printStackTrace();
 											}
+											try {
+//													Instant instant = Instant.now();
+//													long timestampSeconds = instant.getEpochSecond();
+//													System.out.println("Started mvn test: " + timestampSeconds);
+
+												if (runMavenTests(m) == 0) {
+													System.out.println("passed " + m + "\n");
+												} else {
+													operator_mutantkilled++;
+													mutantkilled++;
+													System.out.println("failed" + "\n");
+												}
+
+											} catch (InterruptedException e) {
+												throw new RuntimeException(e);
+											}
+											//restore the file
+										}
 //									if (codeModifier.getMutants().isEmpty()) {
 //										System.out.println("No mutants generated");
 //									}
-										}
-										try {
-											// Create input and output streams for the files
-											Path sourceFile = Paths.get(dummdir + fileName);
-											File sf = new File(dummdir + fileName);
-											Path destinationFile = Paths.get(filePath);
-
-											Files.copy(sourceFile, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-
-											// Delete the source file
-											if (sf.delete()) {
-												System.out.println("File copied and deleted successfully." + "\n");
-											} else {
-												System.out.println("Failed to delete source file.");
-											}
-
-										} catch (IOException e) {
-											System.out.println("An error occurred.");
-											e.printStackTrace();
-										}
-										System.out.println("Mutants generated in total=" + mutantgenerated);
-										System.out.println("Mutants killed in total=" + mutantkilled + "\n");
 									}
+									try {
+										// Create input and output streams for the files
+										Path sourceFile = Paths.get(dummdir + fileName);
+										File sf = new File(dummdir + fileName);
+										Path destinationFile = Paths.get(filePath);
+
+										Files.copy(sourceFile, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+
+										// Delete the source file
+										if (sf.delete()) {
+											System.out.println("File copied and deleted successfully." + "\n");
+										} else {
+											System.out.println("Failed to delete source file.");
+										}
+
+									} catch (IOException e) {
+										System.out.println("An error occurred.");
+										e.printStackTrace();
+									}
+									System.out.println("Mutants generated in total=" + mutantgenerated);
+									System.out.println("Mutants killed in total=" + mutantkilled + "\n");
 								}
 							}
-
 						}
 					}
 				}
-				writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated= "+operator_mutantgenerated+"\n"+"Mutants Killed= "+operator_mutantkilled+"\n"+"Mutation Score= "+((double)operator_mutantkilled/operator_mutantgenerated)*100+"\n");
 			}
+			writer.write(operatorMap.get(mutationoperator)+"\n"+"Mutatnts Generated= "+operator_mutantgenerated+"\n"+"Mutants Killed= "+operator_mutantkilled+"\n"+"Mutation Score= "+((double)operator_mutantkilled/operator_mutantgenerated)*100+"\n");
+		}
 		writer.close();
-    }
+	}
 
 
 	public void deleteFolderContents(File folder) {
@@ -405,3 +409,5 @@ public class CodeModifierTest
 
 	}
 }
+
+

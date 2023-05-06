@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="23" failures="0" name="org.jsoup.helper.HttpConnectionTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="23" failures="0" name="org.jsoup.helper.HttpConnectionTest" time="0.001" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="user.dir" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="aarch64"/>
@@ -61,7 +61,7 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="throwsExceptionOnParseWithoutExecute" time="0.001"/>
+  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="throwsExceptionOnParseWithoutExecute" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="connectWithUrl" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="ignoresEmptySetCookies" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="throwsOnMalformedUrl" time="0"/>
@@ -70,13 +70,13 @@
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="timeout" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="method" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="handlesHeaderEncodingOnRequest" time="0"/>
-  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="referrer" time="0.001"/>
+  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="referrer" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="sameHeadersCombineWithComma" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="inputStream" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="throwsExceptionOnBodyAsBytesWithoutExecute" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="data" time="0"/>
-  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="userAgent" time="0"/>
-  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="throwsExceptionOnBodyWithoutExecute" time="0.001"/>
+  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="userAgent" time="0.001"/>
+  <testcase classname="org.jsoup.helper.HttpConnectionTest" name="throwsExceptionOnBodyWithoutExecute" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="headers" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="noUrlThrowsValidationError" time="0"/>
   <testcase classname="org.jsoup.helper.HttpConnectionTest" name="requestBody" time="0"/>

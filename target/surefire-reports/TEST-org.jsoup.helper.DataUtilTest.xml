@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="15" failures="0" name="org.jsoup.helper.DataUtilTest" time="0.013" errors="0" skipped="0">
+<testsuite tests="15" failures="0" name="org.jsoup.helper.DataUtilTest" time="0.007" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="user.dir" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="aarch64"/>
@@ -62,16 +62,16 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="firstMetaElementWithCharsetShouldBeUsedForDecoding" time="0"/>
-  <testcase classname="org.jsoup.helper.DataUtilTest" name="secondMetaElementWithContentTypeContainsCharsetParameter" time="0.002"/>
-  <testcase classname="org.jsoup.helper.DataUtilTest" name="supportsUTF8BOM" time="0.001"/>
-  <testcase classname="org.jsoup.helper.DataUtilTest" name="generatesMimeBoundaries" time="0"/>
+  <testcase classname="org.jsoup.helper.DataUtilTest" name="secondMetaElementWithContentTypeContainsCharsetParameter" time="0.001"/>
+  <testcase classname="org.jsoup.helper.DataUtilTest" name="supportsUTF8BOM" time="0"/>
+  <testcase classname="org.jsoup.helper.DataUtilTest" name="generatesMimeBoundaries" time="0.001"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="discardsSpuriousByteOrderMarkWhenNoCharsetSet" time="0"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="discardsSpuriousByteOrderMark" time="0"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="shouldCorrectCharsetForDuplicateCharsetString" time="0"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="shouldNotThrowExceptionOnEmptyCharset" time="0"/>
-  <testcase classname="org.jsoup.helper.DataUtilTest" name="testCharset" time="0.002"/>
-  <testcase classname="org.jsoup.helper.DataUtilTest" name="supportsBOMinFiles" time="0.004"/>
-  <testcase classname="org.jsoup.helper.DataUtilTest" name="testQuotedCharset" time="0.002"/>
+  <testcase classname="org.jsoup.helper.DataUtilTest" name="testCharset" time="0.001"/>
+  <testcase classname="org.jsoup.helper.DataUtilTest" name="supportsBOMinFiles" time="0.002"/>
+  <testcase classname="org.jsoup.helper.DataUtilTest" name="testQuotedCharset" time="0"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="wrongMetaCharsetFallback" time="0.001"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="shouldSelectFirstCharsetOnWeirdMultileCharsetsInMetaTags" time="0"/>
   <testcase classname="org.jsoup.helper.DataUtilTest" name="shouldReturnNullForIllegalCharsetNames" time="0.001"/>

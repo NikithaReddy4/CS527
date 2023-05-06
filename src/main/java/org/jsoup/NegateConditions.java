@@ -35,7 +35,7 @@ public class NegateConditions extends VoidVisitorAdapter<String>
 	 * This visit function will be automatically applied to all binary
 	 * expressions in the given Java file
 	 */
-	public void visit(String filename) {
+	public void visit(BinaryExpr n,String filename) {
 
 
 //	int flag=0;

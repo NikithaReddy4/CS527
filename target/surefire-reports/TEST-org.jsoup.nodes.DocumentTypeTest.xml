@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="org.jsoup.nodes.DocumentTypeTest" time="0.005" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="org.jsoup.nodes.DocumentTypeTest" time="0.002" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="user.dir" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="aarch64"/>
@@ -64,6 +64,6 @@
   <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="outerHtmlGeneration" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="constructorValidationOkWithBlankName" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="constructorValidationOkWithBlankPublicAndSystemIds" time="0"/>
-  <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="testRoundTrip" time="0.003"/>
-  <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="constructorValidationThrowsExceptionOnNulls" time="0.002"/>
+  <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="testRoundTrip" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.DocumentTypeTest" name="constructorValidationThrowsExceptionOnNulls" time="0.001"/>
 </testsuite>

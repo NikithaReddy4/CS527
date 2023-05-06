@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="28" failures="0" name="org.jsoup.nodes.DocumentTest" time="0.323" errors="0" skipped="0">
+<testsuite tests="28" failures="0" name="org.jsoup.nodes.DocumentTest" time="0.052" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="user.dir" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="aarch64"/>
@@ -61,32 +61,32 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testOutputEncoding" time="0.06"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateDisabledNoChanges" time="0.001"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testHtmlAppendable" time="0.006"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testLocation" time="0.188"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testClonesDeclarations" time="0.003"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testOutputEncoding" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateDisabledNoChanges" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testHtmlAppendable" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testLocation" time="0.04"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testClonesDeclarations" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testClone" time="0.001"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testShiftJisRoundtrip" time="0.03"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testNormalisesStructure" time="0.026"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testXhtmlReferences" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testShiftJisRoundtrip" time="0.006"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testNormalisesStructure" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testXhtmlReferences" time="0.002"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlNoCharset" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateUtf8" time="0.001"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateEnabledAfterCharsetChange" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateDisabled" time="0"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlDisabled" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlDisabled" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateCleanup" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="DocumentsWithSameContentAreEqual" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdatedDisabledPerDefault" time="0"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlIso8859" time="0.001"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="parseAndHtmlOnDifferentThreads" time="0.001"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateNoCharset" time="0.001"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="DocumentsWithSameContentAreVerifialbe" time="0"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="setTextPreservesDocumentStructure" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlIso8859" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="parseAndHtmlOnDifferentThreads" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateNoCharset" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="DocumentsWithSameContentAreVerifialbe" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="setTextPreservesDocumentStructure" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="htmlParseDefaultsToHtmlOutputSyntax" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateIso8859" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlUtf8" time="0"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testHtmlAndXmlSyntax" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testHtmlAndXmlSyntax" time="0"/>
   <testcase classname="org.jsoup.nodes.DocumentTest" name="testTitles" time="0"/>
-  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlDisabledNoChanges" time="0"/>
+  <testcase classname="org.jsoup.nodes.DocumentTest" name="testMetaCharsetUpdateXmlDisabledNoChanges" time="0.001"/>
 </testsuite>

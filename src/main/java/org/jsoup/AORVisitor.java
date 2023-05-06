@@ -44,7 +44,7 @@ public class AORVisitor extends VoidVisitorAdapter<String>
      * expressions in the given Java file
      */
 
-    public void visit(String filename) {
+    public void visit(BinaryExpr n, String filename) {
         if (!mutated) {
             mutated = true;
             List<BinaryExpr> exprList = originalCu.findAll(BinaryExpr.class);

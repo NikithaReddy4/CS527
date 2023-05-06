@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="org.jsoup.nodes.TextNodeTest" time="0.286" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="org.jsoup.nodes.TextNodeTest" time="0.03" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="user.dir" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="aarch64"/>
@@ -61,10 +61,10 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
-  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testWithSupplementaryCharacter" time="0.28"/>
-  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testLeadNodesHaveNoChildren" time="0.002"/>
-  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testBlank" time="0.001"/>
-  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testTextBean" time="0.002"/>
+  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testWithSupplementaryCharacter" time="0.029"/>
+  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testLeadNodesHaveNoChildren" time="0"/>
+  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testBlank" time="0"/>
+  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testTextBean" time="0.001"/>
   <testcase classname="org.jsoup.nodes.TextNodeTest" name="testSplitText" time="0"/>
-  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testSplitAnEmbolden" time="0.001"/>
+  <testcase classname="org.jsoup.nodes.TextNodeTest" name="testSplitAnEmbolden" time="0"/>
 </testsuite>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="62" failures="0" name="org.jsoup.select.SelectorTest" time="0.014" errors="0" skipped="0">
+<testsuite tests="62" failures="0" name="org.jsoup.select.SelectorTest" time="0.007" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+7-44"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -13,7 +13,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/nikithareddysankepally/Downloads/CS527MT"/>
+    <property name="user.dir" value="/Users/nikithareddysankepally/Desktop/CS527"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="19.0.2+7-44"/>
     <property name="os.arch" value="aarch64"/>
@@ -62,28 +62,28 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
   </properties>
   <testcase classname="org.jsoup.select.SelectorTest" name="containsData" time="0.001"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testByAttributeStarting" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testByAttributeStarting" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="deeperDescendant" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="selectSameElements" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testPseudoEquals" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testByClassCaseInsensitive" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testByAttributeRegexCharacterClass" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testAllWithClass" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testByTag" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testByTag" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testById" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="findBetweenSpan" time="0.001"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="descendant" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="handlesCommasInSelector" time="0.001"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="notAll" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="findBetweenSpan" time="0"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="descendant" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="handlesCommasInSelector" time="0"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="notAll" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testByAttribute" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="selectClassWithSpace" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="notAdjacent" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testCombinedWithContains" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testCombinedWithContains" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="containsWithQuote" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testPseudoGreaterThan" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testPseudoGreaterThan" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testAllElements" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testByAttributeRegex" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="mixCombinator" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testByAttributeRegex" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="mixCombinator" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testRelaxedTags" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testPseudoBetween" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testPseudoLessThan" time="0"/>
@@ -91,17 +91,17 @@
   <testcase classname="org.jsoup.select.SelectorTest" name="testByClass" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="and" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="attributeWithBrackets" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testPsuedoContainsWithParentheses" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testPsuedoContainsWithParentheses" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testGroupOrAttribute" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="caseInsensitive" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="selectFirst" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="containsOwn" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testCharactersInIdAndClass" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="containsOwn" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testCharactersInIdAndClass" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="splitOnBr" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="multiChildDescent" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="adjacentSiblingsWithId" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testMatches" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="matchText" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testMatches" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="matchText" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="selectFirstWithOr" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="matchTextAttributes" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="parentWithClassChild" time="0"/>
@@ -112,14 +112,14 @@
   <testcase classname="org.jsoup.select.SelectorTest" name="testPseudoHas" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="notClass" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="notParas" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="selectSupplementaryCharacter" time="0.001"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="selectSupplementaryCharacter" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="adjacentSiblings" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testNamespacedTag" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testNestedHas" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="parentChildElement" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testByAttributeRegexCombined" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="matchesOwn" time="0"/>
-  <testcase classname="org.jsoup.select.SelectorTest" name="testSupportsLeadingCombinator" time="0"/>
+  <testcase classname="org.jsoup.select.SelectorTest" name="testSupportsLeadingCombinator" time="0.001"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="mixCombinatorGroup" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="testWildcardNamespacedTag" time="0"/>
   <testcase classname="org.jsoup.select.SelectorTest" name="selectFirstWithAnd" time="0"/>

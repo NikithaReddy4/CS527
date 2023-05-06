@@ -1,0 +1,13 @@
+org/jsoup/MathMutator.class
+org/jsoup/ConstructorCalls.class
+org/jsoup/Increments.class
+org/jsoup/AORVisitor.class
+org/jsoup/PrimitiveReturn.class
+org/jsoup/AssignIncrements.class
+org/jsoup/InlineConstant.class
+org/jsoup/RemoveConditionals.class
+org/jsoup/VoidMethodCall.class
+org/jsoup/InvertNegatives.class
+org/jsoup/TrueReturns.class
+org/jsoup/FalseReturns.class
+org/jsoup/OBBN1.class
