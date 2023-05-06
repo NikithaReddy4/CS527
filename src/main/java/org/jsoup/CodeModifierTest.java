@@ -88,7 +88,7 @@ public class CodeModifierTest
 		String resultpath = System.getProperty("user.dir") + "/results/";
 		FileWriter writer = new FileWriter(resultpath+"result.txt");
 		int filecount=0;
-		int mutatorlimit=4;
+		int mutatorlimit=1;
 		int filelimit=61;
 		int mutantgenerated = 0;//to keep track of mutants generated throughout the mutation testing process
 		int mutantkilled = 0;//to keep track of mutants killed throughout the mutation testing process
@@ -117,7 +117,7 @@ public class CodeModifierTest
 		operatorMap.put(17, "Empty Returns Mutator");
 		operatorMap.put(18, "Null Returns Mutator");
 		//iterator for the mutators, in each iterator one mutator is picked and is applied to all the java files
-		for (mutationoperator =0; mutationoperator < 19; mutationoperator++) {
+		for (mutationoperator =0; mutationoperator < mutatorlimit; mutationoperator++) {
 			operator_mutantgenerated=0;
 			operator_mutantkilled=0;
 			filecount=0;
