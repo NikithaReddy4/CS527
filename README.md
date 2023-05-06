@@ -22,7 +22,7 @@ Execution flow of the project:
 Trigger the mvn test command for the first time, which will generate the .class files.
 Run the getJavaFilesAndApplyMutators function to execute the flow accordingly as mentioned above.
 
-Usage: To use this framework, clone the repository and run the mvn test which generates the class files and makes sure that all the testcases are run succesfully on the unmodified code. Then execute the main function in getJavaFilesAndApplyMutators to start the mutation testing. You can change the variable values mutatorlimit and filelimit to limit the number of mutants generated. Leaving filelimit as default value and updating mutatorlimit to 19 will run the mutation testing on entire source code.
+Usage: To use this framework, clone the repository and run the mvn test which generates the class files and makes sure that all the testcases are run succesfully on the unmodified code. Then execute the main function in getJavaFilesAndApplyMutators to start the mutation testing. You can change the variable values mutatorlimit and filelimit to limit the number of mutants generated. Leaving filelimit as default value and update mutatorlimit accprdingly to run the mutation testing on entire source code.
 
 Results: The required surefire reports will be present under report folder in the repository. The metrics for each operator like mutants generated and killed will be present under results folder in repository.
 
